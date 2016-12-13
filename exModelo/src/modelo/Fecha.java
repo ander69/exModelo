@@ -2,8 +2,9 @@ package modelo;
 
 import java.io.Serializable;
 
+
 public class Fecha implements Serializable {
-	int dia,mes,año;
+	private int dia,mes,año;
 
 	public Fecha(int dia, int mes, int año) {
 		super();
@@ -13,8 +14,42 @@ public class Fecha implements Serializable {
 	}
 
 	public Fecha() {
-		super();
+		this(1, 1, 1);
 	}
+	public int compararFechas(Fecha fecha) {		
+		if(año < fecha.año) {
+			return -1;
+		}
+		if(año > fecha.año) {
+			return 1;
+		}
+		
+		if(mes < fecha.mes) {
+			return -1;
+		}
+		if(mes > fecha.mes) {
+			return 1;
+		}
+		
+		if(dia < fecha.dia) {
+			return -1;
+		}
+		if(dia > fecha.dia) {
+			return 1;
+		}
+		
+		return 0;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + año;
+		result = prime * result + dia;
+		result = prime * result + mes;
+		return result;
+	}
+
 
 	public int getDia() {
 		return dia;
@@ -84,6 +119,92 @@ public class Fecha implements Serializable {
 	public String toString() {
 		return dia+"/"+mes+"/"+año;
 	}
+	public String getMesNombre() {
+		switch(mes) {
+		case 1:
+			return "Enero";
+		case 2:
+			return "Febrero";
+		case 3:
+			return "Marzo";
+		case 4:
+			return "Abril";
+		case 5:
+			return "Mayo";
+		case 6:
+			return "Junio";
+		case 7:
+			return "Julio";
+		case 8:
+			return "Agosto";
+		case 9:
+			return "Septiembre";
+		case 10:
+			return "Octubre";
+		case 11:
+			return "Noviembre";
+		case 12:
+			return "Diciembre";
+		default:
+			return "Error";
+		}
+	}
+	public static Fecha crearFecha(String fecha) {
+		String[] romper = fecha.split("/");
+		if(romper.length != 3) {
+			return null;
+		}
+		
+		int dia = 0, mes = 0, año = 0;
+		try {
+			dia = Integer.parseInt(romper[0]);
+			mes = Integer.parseInt(romper[1]);
+			año = Integer.parseInt(romper[2]);
+		} catch(Exception e) {
+			return null;
+		}
+		
+		if(dia < 1 || dia > 30) {
+			return null;
+		}
+		if(mes < 1 || mes > 12) {
+			return null;
+		}
+		if(año < 0) {
+			return null;
+		}
+		
+		return new Fecha(dia, mes, año);
+	}
+	
+	public static boolean comprobar(String fecha) {
+		String[] romper = fecha.split("/");
+		if(romper.length != 3) {
+			return false;
+		}
+		
+		int dia = 0, mes = 0, año = 0;
+		try {
+			dia = Integer.parseInt(romper[0]);
+			mes = Integer.parseInt(romper[1]);
+			año = Integer.parseInt(romper[2]);
+		} catch(Exception e) {
+			return false;
+		}
+		
+		if(dia < 1 || dia > 30) {
+			return false;
+		}
+		if(mes < 1 || mes > 12) {
+			return false;
+		}
+		if(año < 0) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 		
 }
 
