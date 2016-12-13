@@ -11,10 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import controlador.Control;
 
 public class IntroducirMascota extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	Control control = Control.getInstace();
 	private JTextField tfCodigo;
 	private JTextField tfDescripcion;
 	private JTextField tfExistencia;
@@ -110,8 +112,25 @@ public class IntroducirMascota extends JDialog {
 			{
 				JButton okButton = new JButton("A\u00F1adir");
 				okButton.addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent arg0) {
+					String codigo = tfCodigo.getText();
+					String descripcion = tfDescripcion.getText();
+					String existencias = tfExistencia.getText();
+					String dia = tfDia.getText();
+					String mes = tfMes.getText();
+					String anyo = tfAño.getText();
+					control.añadirMascota(codigo,descripcion,existencias,dia,mes,anyo);
+					tfCodigo.setText("");
+					tfDescripcion.setText("");
+					tfExistencia.setText("");
+					tfDia.setText("");
+					tfMes.setText("");
+					tfAño.setText("");
+					
+					
 					}
+					
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);

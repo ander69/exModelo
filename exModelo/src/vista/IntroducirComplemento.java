@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Control;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -15,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class IntroducirComplemento extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	Control control = Control.getInstace();
 	private JTextField tfCodigo;
 	private JTextField tfDescripcion;
 	private JTextField tfExistencias;
@@ -109,6 +113,26 @@ public class IntroducirComplemento extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("A\u00F1adir");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						String codigo = tfCodigo.getText();
+						String descripcion = tfDescripcion.getText();
+						String existencias = tfExistencias.getText();
+						String dia = tfDia.getText();
+						String mes = tfMes.getText();
+						String anyo = tfAño.getText();
+						control.añadirComplemento(codigo,descripcion,existencias,dia,mes,anyo);
+						tfCodigo.setText("");
+						tfDescripcion.setText("");
+						tfExistencias.setText("");
+						tfDia.setText("");
+						tfMes.setText("");
+						tfAño.setText("");
+					
+					
+					}
+					
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

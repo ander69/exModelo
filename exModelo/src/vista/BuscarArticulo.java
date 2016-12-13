@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Control;
+import modelo.Articulo;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -16,7 +20,9 @@ import java.awt.event.ActionEvent;
 public class BuscarArticulo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	Control control = Control.getInstace();
 	private JTextField tfCodigo;
+	private JTextField tfArticulo;
 
 
 
@@ -41,12 +47,16 @@ public class BuscarArticulo extends JDialog {
 			contentPanel.add(lblCodigoArticulo);
 		}
 		{
-			JTextPane textPane = new JTextPane();
-			textPane.setBounds(12, 84, 546, 159);
-			contentPanel.add(textPane);
-		}
-		{
 			JButton btnBuscar = new JButton("Buscar");
+			btnBuscar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Articulo ar1 = control.buscarArt(tfCodigo.getText());
+					if (ar1 != null){
+						tfArticulo.setText("Descripcion: "+ar1.getDescripcion()+" Cantidad: "+ar1.getExistencias()+" "+ar1.toString());
+						
+					}
+				}
+			});
 			btnBuscar.setBounds(417, 46, 97, 25);
 			contentPanel.add(btnBuscar);
 		}
@@ -55,6 +65,11 @@ public class BuscarArticulo extends JDialog {
 			lblBuscarArticulos.setBounds(245, 13, 146, 16);
 			contentPanel.add(lblBuscarArticulos);
 		}
+		
+		tfArticulo = new JTextField();
+		tfArticulo.setBounds(12, 82, 533, 176);
+		contentPanel.add(tfArticulo);
+		tfArticulo.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -71,5 +86,4 @@ public class BuscarArticulo extends JDialog {
 			}
 		}
 	}
-
 }

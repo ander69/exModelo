@@ -2,39 +2,44 @@ package modelo;
 
 
 public class Mascotas extends Articulo implements SerVivo{
-	private Fecha fechaNacimiento;
+	
+	
 	
 	public Mascotas(long codigo, String descripcion, int existencias, Fecha fechaNacimiento) {
 		super(codigo, descripcion, existencias);
-		this.fechaNacimiento = fechaNacimiento;
-	}
-	
-	@Override
-	public void modificar(Articulo articulo) {
-		super.modificar(articulo);
-		if(!(articulo instanceof Mascotas)) {
-			return;
-		}
-		Mascotas mascotas = (Mascotas) articulo;
-		this.fechaNacimiento = mascotas.fechaNacimiento;
+		FechaNacimiento = fechaNacimiento;
 	}
 
-	@Override
-	public String toString() {
-		return super.toString() + ", fecha de nacimiento: " + fechaNacimiento + ", celebramos su cumpleaños el " + cumpleaños();
-	}
-
-	@Override
-	public String cumpleaños() {
-		return fechaNacimiento.getDia() + " de " + fechaNacimiento.getMesNombre();
-	}
+	Fecha FechaNacimiento;
 
 	public Fecha getFechaNacimiento() {
-		return fechaNacimiento;
+		return FechaNacimiento;
 	}
 
 	public void setFechaNacimiento(Fecha fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}	
-}
+		FechaNacimiento = fechaNacimiento;
+	}
 	
+	public String cumpleaños(){
+		String mesTexto;
+		switch (FechaNacimiento.getMes()){
+		case 1: mesTexto = "Enero";break;
+		case 2: mesTexto = "Febrero";break;
+		case 3: mesTexto = "Marzo";break;
+		case 4: mesTexto = "Abril";break;
+		case 5: mesTexto = "Mayo";break;
+		case 6: mesTexto = "Junio";break;
+		case 7: mesTexto = "Julio";break;
+		case 8: mesTexto = "Agosto";break;
+		case 9: mesTexto = "Septiembre";break;
+		case 10: mesTexto = "Octubre";break;
+		case 11: mesTexto = "Noviembre";break;
+		case 12: mesTexto = "Diciembre";break;
+		default: mesTexto="";
+		}
+		return FechaNacimiento.getDia() + "de" + mesTexto;
+	}
+	
+	
+	
+}

@@ -3,53 +3,22 @@ package modelo;
 import java.io.Serializable;
 
 
-public class Fecha implements Serializable {
-	private int dia,mes,año;
-
-	public Fecha(int dia, int mes, int año) {
+public class Fecha implements Serializable{
+	private int dia;
+	private int mes;
+	private int anio;
+	
+	
+	public Fecha(int dia, int mes, int anio) {
 		super();
 		this.dia = dia;
 		this.mes = mes;
-		this.año = año;
+		this.anio = anio;
 	}
-
-	public Fecha() {
-		this(1, 1, 1);
-	}
-	public int compararFechas(Fecha fecha) {		
-		if(año < fecha.año) {
-			return -1;
-		}
-		if(año > fecha.año) {
-			return 1;
-		}
+	
+	public Fecha(){
 		
-		if(mes < fecha.mes) {
-			return -1;
-		}
-		if(mes > fecha.mes) {
-			return 1;
-		}
-		
-		if(dia < fecha.dia) {
-			return -1;
-		}
-		if(dia > fecha.dia) {
-			return 1;
-		}
-		
-		return 0;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + año;
-		result = prime * result + dia;
-		result = prime * result + mes;
-		return result;
-	}
-
 
 	public int getDia() {
 		return dia;
@@ -67,14 +36,18 @@ public class Fecha implements Serializable {
 		this.mes = mes;
 	}
 
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
+	@Override
+	public String toString() {
+		return ""+dia+"/"+mes+"/"+anio+"";
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -85,7 +58,7 @@ public class Fecha implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Fecha other = (Fecha) obj;
-		if (año != other.año)
+		if (anio != other.anio)
 			return false;
 		if (dia != other.dia)
 			return false;
@@ -93,119 +66,21 @@ public class Fecha implements Serializable {
 			return false;
 		return true;
 	}
+
+	public int comparaFechas(int anio,int mes,int dia) {
 		
-	public int compare(Fecha fecha) {		
-		if(año < fecha.año) {
-			return -1;
-		} else if(año > fecha.año) {
+		if(this.anio > anio){
 			return 1;
-		} else {
-			if(mes < fecha.mes) {
-				return -1;
-			} else if(mes > fecha.mes) {
-				return 1;
-			} else {
-				if(dia < fecha.dia) {
-					return -1;
-				} else if(dia > fecha.dia) {
-					return 1;
-				} else {
-					return 0;
-				}
+		}
+		if(this.anio < anio){
+			return -1;
+		}else{
+			if(this.mes == mes && this.dia == dia){
+				return 0;
 			}
 		}
-	}
-	@Override
-	public String toString() {
-		return dia+"/"+mes+"/"+año;
-	}
-	public String getMesNombre() {
-		switch(mes) {
-		case 1:
-			return "Enero";
-		case 2:
-			return "Febrero";
-		case 3:
-			return "Marzo";
-		case 4:
-			return "Abril";
-		case 5:
-			return "Mayo";
-		case 6:
-			return "Junio";
-		case 7:
-			return "Julio";
-		case 8:
-			return "Agosto";
-		case 9:
-			return "Septiembre";
-		case 10:
-			return "Octubre";
-		case 11:
-			return "Noviembre";
-		case 12:
-			return "Diciembre";
-		default:
-			return "Error";
-		}
-	}
-	public static Fecha crearFecha(String fecha) {
-		String[] romper = fecha.split("/");
-		if(romper.length != 3) {
-			return null;
-		}
-		
-		int dia = 0, mes = 0, año = 0;
-		try {
-			dia = Integer.parseInt(romper[0]);
-			mes = Integer.parseInt(romper[1]);
-			año = Integer.parseInt(romper[2]);
-		} catch(Exception e) {
-			return null;
-		}
-		
-		if(dia < 1 || dia > 30) {
-			return null;
-		}
-		if(mes < 1 || mes > 12) {
-			return null;
-		}
-		if(año < 0) {
-			return null;
-		}
-		
-		return new Fecha(dia, mes, año);
+		return -1;
+	
 	}
 	
-	public static boolean comprobar(String fecha) {
-		String[] romper = fecha.split("/");
-		if(romper.length != 3) {
-			return false;
-		}
-		
-		int dia = 0, mes = 0, año = 0;
-		try {
-			dia = Integer.parseInt(romper[0]);
-			mes = Integer.parseInt(romper[1]);
-			año = Integer.parseInt(romper[2]);
-		} catch(Exception e) {
-			return false;
-		}
-		
-		if(dia < 1 || dia > 30) {
-			return false;
-		}
-		if(mes < 1 || mes > 12) {
-			return false;
-		}
-		if(año < 0) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-		
 }
-
-

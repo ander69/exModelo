@@ -1,34 +1,27 @@
 package modelo;
 
 
-public class Complementos extends Articulo {
-	private Fecha fechaCaducidad;
-	
-	public Complementos(long codigo, String descripcion, int existencias,Fecha fechacaducidad){
+public class Complementos extends Articulo{
+	Fecha FechaCaducidad;
+
+	public Complementos(long codigo, String descripcion, int existencias, Fecha fechaCaducidad) {
 		super(codigo, descripcion, existencias);
-		this.fechaCaducidad = fechacaducidad;
+		FechaCaducidad = fechaCaducidad;
 	}
 
 	public Fecha getFechaCaducidad() {
-		return fechaCaducidad;
+		return FechaCaducidad;
 	}
 
 	public void setFechaCaducidad(Fecha fechaCaducidad) {
-		this.fechaCaducidad = fechaCaducidad;
+		this.FechaCaducidad = fechaCaducidad;
 	}
 
 	@Override
 	public String toString() {
-		return "Complementos fechaCaducidad=" + fechaCaducidad ;
+		return "FechaCaducidad: " + FechaCaducidad;
 	}
-	@Override
-	public void modificar(Articulo articulo) {
-		super.modificar(articulo);
-		if(!(articulo instanceof Complementos)) {
-			return;
-		}
-		Complementos complementos = (Complementos) articulo;
-		this.fechaCaducidad = complementos.fechaCaducidad;
-	}
-
+	
+	
+	
 }
